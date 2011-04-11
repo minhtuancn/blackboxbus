@@ -9,7 +9,7 @@
 
 <style type="text/css">@import "css/global.css";</style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+<script type="text/javascript" src = "map/map.js"></script>
 <script>
 	function busSelected() {
 		/* Get Bus number and time period
@@ -32,6 +32,9 @@
 		xB = 105.92943574266053;
 		name = "22XY3B";
 		// hien toa do diem tren
+		var map = drawSimpleMap();
+		
+		
 	}
 </script>
 </head>
@@ -67,8 +70,11 @@
 		</div>
 	</div> <!-- End side-bar -->
 	
-	<div id="map">
-		Map
+	<div id="map" style="width: 500px; height: 300px ;top: 0px">
+		
+	</div>
+	<div id="map_canvas" style="width: 500px; height: 300px ;top: 0px">
+		
 	</div>
 	
 </body>
