@@ -1,0 +1,21 @@
+@CHARSET "ISO-8859-1";
+
+#side-bar{
+	width: 200px;
+	float:left;
+}
+
+select {
+	width: 90px;
+}
+
+#map {
+	margin: 0;
+	padding: 0;
+}
+
+.side-bar-item {
+  border: 5px solid #c4c8cc;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+}
