@@ -1,6 +1,6 @@
 <?php
 	
 	include_once dirname ( __FILE__ ) . '/config/include.inc.php';
-	$businfo = new BusInfo('12a24');
-	print_r($businfo->getInfo());
+	$businfo = new BusWay(16);
+	print_r($businfo->getWayLocation());
 ?>
