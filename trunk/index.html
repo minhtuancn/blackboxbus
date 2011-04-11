@@ -22,6 +22,12 @@
 		timePicker = $("#time-picker").val();
 		
 		//1.Display bus way location
+		url = 'busway.php?bus_number='+busNumber;
+		alert("fuck 1");
+		$.get(url, function (buswayLocation){
+			alert(buswayLocation);
+		});
+		alert("fuck 2");
 	}
 </script>
 </head>
