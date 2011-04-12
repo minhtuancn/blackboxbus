@@ -12,8 +12,7 @@
 <script type="text/javascript" src = "map/map.js"></script>
 <script>
 	$(function (){
-		var map = drawSimpleMap();
-		
+		var map = drawSimpleMap();		
 	});
 
 	function busSelected() {
@@ -26,17 +25,19 @@
 		busNumber  = $("#bus-number").val();
 		timePicker = $("#time-picker").val();
 		
-		//1.Display bus way location
+		//1.Display bus location
+		url = 'buslocation.php?bus_number_plate='+busNumber+'&time_picker='+timePicker;
+		$.get(url, function (buslocation){
+			/*TODO HERE
+			*/
+			buslocation = buslocation.split("|");
+			drawMap(buslocation[0],buslocation[1],buslocation[2]);
+		});
+		
 		url = 'businfo.php?bus_number_plate='+busNumber+'&time_picker='+timePicker;
 		$.get(url, function (businfo){
 			$("#bus-info").html(businfo);
 		});
-		
-		//Cuong
-		xA = 21.024054093266383;
-		xB = 105.92943574266053;
-		name = "22XY3B";
-		// hien toa do diem tren
 		
 	}
 </script>

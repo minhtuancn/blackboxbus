@@ -11,7 +11,7 @@
 }
 
 #bus-info{
-	height: 280px;
+	height: 300px;
 }
 
 select {
@@ -21,7 +21,7 @@ select {
 #map {
 	margin-left: 230px;
 	padding: 0;
-	height: 505px;
+	height: 535px;
 }
 
 .side-bar-item {
