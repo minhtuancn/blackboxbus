@@ -39,7 +39,7 @@
      	// Set up our GMarkerOptions object literal
       	markerOptions = { icon:Icon };
       	var marker = new GMarker(point, markerOptions);
-      	var infoPoint = "<b>Longitude </b>" + long + "</br><b>Lattitude </b>"+lat+"</br><b>Info Bus: </b></br>"+info;
+      	var infoPoint = ""+info;
     	marker.openInfoWindowHtml(infoPoint);
        
         return marker;
