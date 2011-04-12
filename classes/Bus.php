@@ -34,9 +34,16 @@
 		
 		public function getBusInfo() {
 			$db     = new DB();
-			$query  = "SELECT bus_kind 
-				from bus_info 
-				where  bus_number_plate = '{$this->bus_number_plate}'
+			$query  = "
+				SELECT 
+					bi.bus_number as bus_number, bus_number_plate, kind_name as bus_kind_name, kind_name, noSit, bus_start_name, bus_end_name, bus_frequency, bus_start_time, bus_end_time
+				FROM 
+					`bus_info` as bi 
+				INNER JOIN
+					bus_kind as bk on bk.kind_id = bi.bus_kind
+				INNER JOIN
+					bus_way as bw on bw.bus_number = bi.bus_number
+				where bus_number_plate = '53N - 3333'
 			";
 			$result = $db->runQuery($query);
 			$db->close();
@@ -44,7 +51,7 @@
 			if ($row == false)
 				return 0;
 				
-			return $row['bus_kind'];
+			return $row;
 		}
 		
 		public static function getBusList() {
@@ -58,6 +65,24 @@
 			}
 			
 			return $arr;
+		}
+		
+		public function getBusLocation($time) {
+//			$arrTime = explode(" ", $time);
+//			$date = explode($delimiter, $string)
+//			echo dateecho "<br>";
+			$db = new DB();
+			$query = "
+				SELECT 
+					bus_location
+				FROM
+					bus_info as bi
+				INNER JOIN
+					bus_data as bd on bi.bus_id = bd.bus_id
+				WHERE
+					bus_number_plate = '{$this->bus_number_plate}'
+					and 
+			";
 		}
 	}
 ?>

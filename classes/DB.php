@@ -35,6 +35,7 @@ class DB {
 	}
 	
 	public function runQuery($query){
+		mysql_query("SET NAMES 'utf8'");
 		$result = mysql_query($query);
 		if (!$result){
 			echo "Could not successfully run query ($sql) from DB: " . mysql_error();

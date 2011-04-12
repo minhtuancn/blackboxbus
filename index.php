@@ -30,9 +30,9 @@
 		timePicker = $("#time-picker").val();
 		
 		//1.Display bus way location
-		url = 'busway.php?bus_number='+busNumber;
-		$.get(url, function (buswayLocation){
-			alert(buswayLocation);
+		url = 'businfo.php?bus_number_plate='+busNumber+'&time_picker='+timePicker;
+		$.get(url, function (businfo){
+			$("#bus-info").html(businfo);
 		});
 		
 		//Cuong
@@ -77,9 +77,6 @@
 			<div class="side-bar-item-header">
 				THÔNG TIN XE
 			</div>
-		</div>
-		<div id="bus-info">
-			
 		</div>
 	</div> <!-- End side-bar -->
 	
