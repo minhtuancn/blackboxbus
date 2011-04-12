@@ -27,7 +27,23 @@
 	<?php 
 		if (isset($_GET['time_picker'])) {
 			$time_picker = $_GET['time_picker'];
-			$bus_location = $bus->getBusLocation($time_picker);
+			$busInfoAtTime = $bus->getBusInfoAtTime($time_picker);
+			$bus_location = explode(";", $busInfoAtTime['bus_location']);
+			//print_r($busInfoAtTime);
+			$bus_speed = $busInfoAtTime['bus_speed'];
+			$info = "Biển số: {$busInfo['bus_number_plate']}";
+			$info .= "<br>";
+			$info .= "Tốc độ: $bus_speed km/h";
+			echo "
+				<script>
+					var xA = 21.024054093266383;
+					var xB = 105.92943574266053;
+					var name = '22XY3B';
+					//drawMap(xA, xB, name);
+					drawMap($bus_location[0], $bus_location[1], '$info');
+				</script>
+			";
+			echo "<h4>Tốc độ: {$bus_speed} km/h</h4>";
 		}
 	?>
 </body>

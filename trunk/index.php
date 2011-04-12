@@ -13,10 +13,7 @@
 <script>
 	$(function (){
 		var map = drawSimpleMap();
-		xA = 21.024054093266383;
-		xB = 105.92943574266053;
-		name = "22XY3B";
-		drawMap(xA, xB, name);
+		
 	});
 
 	function busSelected() {
