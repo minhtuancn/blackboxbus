@@ -67,22 +67,31 @@
 			return $arr;
 		}
 		
-		public function getBusLocation($time) {
-//			$arrTime = explode(" ", $time);
-//			$date = explode($delimiter, $string)
-//			echo dateecho "<br>";
+		public function getBusInfoAtTime($time) {
+			$arrTime = explode(" ", $time);
+			$date = explode("/", $arrTime[0]);
+			$start_minute = $date[2]."-".$date[0]."-".$date[1]." ".$arrTime[1].":00";
+			$end_minute = $date[2]."-".$date[0]."-".$date[1]." ".$arrTime[1].":59";
+			
 			$db = new DB();
 			$query = "
 				SELECT 
-					bus_location
+					bus_location, bus_speed
 				FROM
 					bus_info as bi
 				INNER JOIN
 					bus_data as bd on bi.bus_id = bd.bus_id
 				WHERE
 					bus_number_plate = '{$this->bus_number_plate}'
-					and 
+					and ((bus_time_updated >= '$start_minute') and (bus_time_updated <= '$end_minute'))
 			";
+			
+			$result = $db->runQuery($query);
+			$db->close();
+			$row    = mysql_fetch_assoc($result);
+			if ($row == false)
+				return 0;
+			return $row;
 		}
 	}
 ?>
