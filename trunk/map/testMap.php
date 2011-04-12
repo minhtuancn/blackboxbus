@@ -4,7 +4,7 @@
 
 </head>
 
-  <body onload="drawMap(21.0073,105.8400,234)" onunload="GUnload()">
+  <body onload="drawMap(21.024054093266383,105.8400,234)" onunload="GUnload()">
     <div id="map_canvas" style="width: 500px; height: 300px"></div>
     <input type="button" onClick="test()" value="Test"/>
   </body>
