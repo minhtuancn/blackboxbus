@@ -39,7 +39,7 @@
      	// Set up our GMarkerOptions object literal
       	markerOptions = { icon:Icon };
       	var marker = new GMarker(point, markerOptions);
-      	var infoPoint = "<b>Longitude </b>" + long + "</br><b>Lattitude </b>"+lat+"</br>Info";
+      	var infoPoint = "<b>Longitude </b>" + long + "</br><b>Lattitude </b>"+lat+"</br><b>Info Bus: </b></br>"+info;
     	marker.openInfoWindowHtml(infoPoint);
        
         return marker;
@@ -52,7 +52,7 @@
     function drawMap(lat,long,info) {
     	//draw simple Map
     	if (GBrowserIsCompatible()) {
-            var map = new GMap2(document.getElementById("map_canvas"));
+            var map = new GMap2(document.getElementById("map"));
             map.setCenter(new GLatLng(21.0063,105.8429), 13);
             map.setUIToDefault();
           }
