@@ -43,7 +43,7 @@
 					bus_kind as bk on bk.kind_id = bi.bus_kind
 				INNER JOIN
 					bus_way as bw on bw.bus_number = bi.bus_number
-				where bus_number_plate = '53N - 3333'
+				where bus_number_plate = '{$this->bus_number_plate}'
 			";
 			$result = $db->runQuery($query);
 			$db->close();
@@ -68,24 +68,42 @@
 		}
 		
 		public function getBusInfoAtTime($time) {
-			$arrTime = explode(" ", $time);
-			$date = explode("/", $arrTime[0]);
-			$start_minute = $date[2]."-".$date[0]."-".$date[1]." ".$arrTime[1].":00";
-			$end_minute = $date[2]."-".$date[0]."-".$date[1]." ".$arrTime[1].":59";
 			
+			if ($time !=0) {
+				$arrTime = explode(" ", $time);
+				$date = explode("/", $arrTime[0]);
+				$start_minute = $date[2]."-".$date[0]."-".$date[1]." ".$arrTime[1].":00";
+				$end_minute = $date[2]."-".$date[0]."-".$date[1]." ".$arrTime[1].":59";
+				
+				$query = "
+					SELECT 
+						bus_location, bus_speed
+					FROM
+						bus_info as bi
+					INNER JOIN
+						bus_data as bd on bi.bus_id = bd.bus_id
+					WHERE
+						bus_number_plate = '{$this->bus_number_plate}'
+						and ((bus_time_updated >= '$start_minute') and (bus_time_updated <= '$end_minute'))
+				";
+			}
+			else
+				
+				$query = "
+					SELECT 
+						bus_location, bus_speed
+					FROM
+						bus_info as bi
+					INNER JOIN
+						bus_data as bd on bi.bus_id = bd.bus_id
+					WHERE
+						bus_number_plate = '{$this->bus_number_plate}'
+					ORDER BY 
+						bus_time_updated desc
+					LIMIT 1						
+				";
+				
 			$db = new DB();
-			$query = "
-				SELECT 
-					bus_location, bus_speed
-				FROM
-					bus_info as bi
-				INNER JOIN
-					bus_data as bd on bi.bus_id = bd.bus_id
-				WHERE
-					bus_number_plate = '{$this->bus_number_plate}'
-					and ((bus_time_updated >= '$start_minute') and (bus_time_updated <= '$end_minute'))
-			";
-			
 			$result = $db->runQuery($query);
 			$db->close();
 			$row    = mysql_fetch_assoc($result);
