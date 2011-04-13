@@ -68,7 +68,7 @@
 			<p><label>Toạ độ hiện tại xe</label></p>
 			<form>
 				<textarea id="bus-location-picker" ></textarea>
-				<input type="reset" value="clear" />
+				<input type="reset" value ="clear" />
 				<input type="button" value="draw" />
 			</form>
 		</div>

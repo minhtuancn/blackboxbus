@@ -81,29 +81,39 @@
              map.setCenter(new GLatLng(21.0063,105.8429), 15);
              map.setUIToDefault();
             var i=0;
+            var count = 0;
            
            }
     	 GEvent.addListener(map,"click", function(overlay, latlng) {     
     		  if (latlng) { 
-    				
+    			
     		    var myHtml = "The Point value is: " + latlng;
     		    map.openInfoWindow(latlng, myHtml);
-    		  
+    		    // Set Time
     		    var time = getTime();
-    		   
     		    i++;
+    		    count++;
+    		    // Set text to Text-area
     		   var text = $("#bus-location-picker").text();
     		   if(text=="")$("#bus-location-picker").text(time+latlng);
-    		   else $("#bus-location-picker").text(text+'|'+time+latlng);
-    		   
+    		   		else $("#bus-location-picker").text(text+'|'+time+latlng);
+    		   // Set marker
+    		   map.addOverlay(new GMarker(latlng));
+    		   // Get lat,lng
     		   lat = latlng.lat();
     		   lng = latlng.lng();
-    		   
+    		   // Draw Line
+    		   if(count>1)
+    			   {
+    			   aline = getLine1(tmplat,tmplng,lat,lng);
+    			   map.addOverlay(aline);
+    			   }
+    		   tmplat = lat;
+    		   tmplng = lng;
     		   
     		  }
-    		});
-    
-    }
+    	});
+  }
     /**
      * Draw Line of bus
      * arrPoint : array of points
