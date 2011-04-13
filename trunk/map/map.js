@@ -49,24 +49,7 @@
      * lat,long : toa do tai thoi gian chon
      * info : Thong tin bus tai thoi gian chon
      */
-    function drawMap(lat,long,info) {
-    	//draw simple Map
-    	if (GBrowserIsCompatible()) {
-            var map = new GMap2(document.getElementById("map"));
-            map.setCenter(new GLatLng(21.0063,105.8429), 13);
-            map.setUIToDefault();
-          }
-    	//Data for Test
-    	 var arrayPoint = new Array(new Array(21.0073,105.8400),new Array(21.0083,105.8300),new Array(21.0093,105.8320));
-    	//Draw Line
-    	var i = 0;
-    	while(i<arrayPoint.length-1){
-    		
-			aline = getLine(arrayPoint[i][0],arrayPoint[i][1],arrayPoint[i+1][0],arrayPoint[i+1][1]);
-			i=i+1;
-			map.addOverlay(aline);
-           }
-    	//Make marker
+    function drawMap(map,lat,long,info) {
     	var marker = createMarker(lat,long,info);
     	map.addOverlay(marker);
     	
