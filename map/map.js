@@ -1,7 +1,7 @@
 /**
  * Functions for Draw Map
  */
-  document.write("<script type='text/javascript' src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAlXwQNVL6R0pjorvSTlfROxQIQxe5chJeZhZqejn_r7buVBDGjRSz6zaBPOulfaC4XueARN6r_AmC6A&sensor=true_or_false'></scr"+"ipt>");
+  document.write("<script type='text/javascript' src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA4M3L_03UW0D2V9Tea15TthSQckJgczrWPGQt5orZABR_V_fHMRRlJMhVMTTNrUUyNstxlIjmfQ3pPg&sensor=false'></scr"+"ipt>");
    /**
     * Function for draw a simple Map
     */
@@ -95,8 +95,8 @@
     		    count++;
     		    // Set text to Text-area
     		   var text = $("#bus-location-picker").text();
-    		   if(text=="")$("#bus-location-picker").text(time+latlng);
-    		   		else $("#bus-location-picker").text(text+'|'+time+latlng);
+    		   if(text=="")$("#bus-location-picker").text(time+"^"+latlng);
+    		   		else $("#bus-location-picker").text(text+'|'+time+"^"+latlng);
     		   // Set marker
     		   map.addOverlay(new GMarker(latlng));
     		   // Get lat,lng

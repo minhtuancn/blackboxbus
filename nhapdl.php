@@ -27,8 +27,16 @@
 		
 		//Get input
 		busNumber  = $("#bus-number").val();
-		alert("test"+test);
+		data = $("#bus-location-picker").val();
+		$.post("bussavelocation.php", {bus_number_plate: busNumber, data: data}, function (data2){
+			alert("Done");
+			location.href = "nhapdl.php";
+		});
 		
+	}
+
+	function clearMen() {
+		location.href = "nhapdl.php";
 	}
 </script>
 </head>
@@ -68,8 +76,7 @@
 			<p><label>Toạ độ hiện tại xe</label></p>
 			<form>
 				<textarea id="bus-location-picker" ></textarea>
-				<input type="reset" value ="clear" />
-				<input type="button" value="draw" />
+				<input type="button" value ="clear" onclick="javascript:clearMen()" />
 			</form>
 		</div>
 	</div> <!-- End side-bar -->
