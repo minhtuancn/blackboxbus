@@ -16,10 +16,19 @@
     /** 
 	Function return a Line
     */
-    function getLine(a,b,c,d){
+    function getLine1(a,b,c,d){
     	var aline = new GPolyline([
     	   new GLatLng(a, b),
            new GLatLng(c, d)
+    ], "#FF0000", 3);
+   	return aline;
+    }
+    /** 
+	Function return a Line
+    */
+    function getLine(a,b){
+    	var aline = new GPolyline([
+    	a,b
     ], "#FF0000", 3);
    	return aline;
     }
@@ -61,5 +70,49 @@
     	
     
     }
+    /**
+     * Show Map with Click event to show array Points
+     */
+    function drawMapWithClick(){
+    	var arrPoint = new Array();
+    
+    	 if (GBrowserIsCompatible()) {
+             var map = new GMap2(document.getElementById("map"));
+             map.setCenter(new GLatLng(21.0063,105.8429), 15);
+             map.setUIToDefault();
+            var i=0;
+           
+           }
+    	 GEvent.addListener(map,"click", function(overlay, latlng) {     
+    		  if (latlng) { 
+    		    var myHtml = "The Point value is: " + latlng;
+    		    map.openInfoWindow(latlng, myHtml);
+    		    arrPoint[i] = latlng;
+    		    i++;
+    		    document.getElementById('bus-location-picker').innerHTML =  arrPoint;
+    		  }
+    		});
+    	
+    	return arrPoint;
+    	
+    }
+    /**
+     * Draw Line of bus
+     * arrPoint : array of points
+    
+     */
+    function drawLine(map,arrPoint) {
+    	var i = 0;
+    	while(i<arrayPoint.length-1){
+    		
+			aline = getLine(arrayPoint[i],arrayPoint[i+1]);
+			i=i+1;
+			map.addOverlay(aline);
+           }
+    	
+    	
+    
+    }
+    
     
     
