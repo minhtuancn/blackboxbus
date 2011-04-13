@@ -85,6 +85,9 @@
 					WHERE
 						bus_number_plate = '{$this->bus_number_plate}'
 						and ((bus_time_updated >= '$start_minute') and (bus_time_updated <= '$end_minute'))
+					ORDER BY 
+						bus_time_updated desc
+					LIMIT 1
 				";
 			}
 			else
@@ -110,6 +113,36 @@
 			if ($row == false)
 				return 0;
 			return $row;
+		}
+		
+		public static function insertData($bus_number_plate, $location, $speed=35, $time) {
+			$db = new DB();
+			$query = "SELECT bus_id from bus_info where bus_number_plate='{$bus_number_plate}'";
+			$result = $db->runQuery($query);
+			$row    = mysql_fetch_assoc($result);
+			if ($row == false)
+				return 0;
+			$bus_id =  $row['bus_id'];
+			
+			$query  = "INSERT into bus_data values (null,'$bus_id','$location','$speed', '$time')";
+			$result = $db->runQuery($query); 
+		}
+		
+		public static function insertDatas($bus_number_plate, $data) {
+			$db = new DB();
+			$query = "SELECT bus_id from bus_info where bus_number_plate='{$bus_number_plate}'";
+			$result = $db->runQuery($query);
+			$row    = mysql_fetch_assoc($result);
+			if ($row == false)
+				return 0;
+			$bus_id =  $row['bus_id'];
+			
+			foreach ($data as $dataItem) {
+				$query  = "INSERT into bus_data values (null,'$bus_id','$dataItem[0]','$dataItem[1]', '$dataItem[2]')";
+				echo $query;
+				$result = $db->runQuery($query); 
+			}
+			
 		}
 	}
 ?>
