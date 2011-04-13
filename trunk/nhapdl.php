@@ -11,8 +11,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src = "map/map.js"></script>
 <script>
+ var test;
 	$(function (){		
-		var map = drawSimpleMap();
+		 test = drawMapWithClick();
+		
 	});
 
 	count = 0;
@@ -25,6 +27,7 @@
 		
 		//Get input
 		busNumber  = $("#bus-number").val();
+		alert("test"+test);
 		
 	}
 </script>
