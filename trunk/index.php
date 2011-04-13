@@ -32,7 +32,6 @@
 		$.get(url, function (buslocation){
 			/*TODO HERE
 			*/
-			count++;
 			$("#map").html("");
 			var map = drawSimpleMap();
 			buslocation = buslocation.split("|");

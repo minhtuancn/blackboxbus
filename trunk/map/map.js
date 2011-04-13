@@ -30,7 +30,7 @@
     function createMarker(lat,long,info) {
       	 var point = new GLatLng(lat,long);
       // Create our  marker icon
-     	var Icon = new GIcon();
+     	/*var Icon = new GIcon();
      	Icon.image = "http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=cafe|996600";
      	Icon.iconSize = new GSize(40, 53);
      	Icon.shadowSize = new GSize(37, 53);
@@ -38,9 +38,10 @@
      	Icon.infoWindowAnchor = new GPoint(9, 2);
      	// Set up our GMarkerOptions object literal
       	markerOptions = { icon:Icon };
-      	var marker = new GMarker(point, markerOptions);
-      	var infoPoint = ""+info;
-    	marker.openInfoWindowHtml(infoPoint);
+      	var marker = new GMarker(point, markerOptions);*/
+     	var marker = new GMarker(point);
+      	//var infoPoint = ""+info;
+    	//marker.openInfoWindowHtml(infoPoint);
        
         return marker;
      	}
@@ -50,7 +51,12 @@
      * info : Thong tin bus tai thoi gian chon
      */
     function drawMap(map,lat,long,info) {
+    	
+    	if (lat == 0)
+    		return;
     	var marker = createMarker(lat,long,info);
+    	var point = new GLatLng(lat,long);
+    	map.openInfoWindowHtml(point,info);
     	map.addOverlay(marker);
     	
     
