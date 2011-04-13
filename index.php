@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Black Box Bus - demo version</title>
+<title>Black Box Bus - Demo Version</title>
 
 <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
@@ -11,10 +11,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src = "map/map.js"></script>
 <script>
-	$(function (){
-		var map = drawSimpleMap();		
+	$(function (){		
+		var map = drawSimpleMap();
 	});
 
+	count = 0;
+	
 	function busSelected() {
 		/* Get Bus number and time period
 			1. Display bus way location
@@ -30,8 +32,11 @@
 		$.get(url, function (buslocation){
 			/*TODO HERE
 			*/
+			count++;
+			$("#map").html("");
+			var map = drawSimpleMap();
 			buslocation = buslocation.split("|");
-			drawMap(buslocation[0],buslocation[1],buslocation[2]);
+			drawMap(map,buslocation[0],buslocation[1],buslocation[2]);
 		});
 		
 		url = 'businfo.php?bus_number_plate='+busNumber+'&time_picker='+timePicker;
@@ -51,24 +56,29 @@
 				BUS
 			</div>
 			<p><label>Chọn xe bus</label></p>
-			<select id="bus-number">
-				<?php
-					include_once dirname ( __FILE__ ) . '/config/include.inc.php';
-					/* Get list bus
-					*/
-					$bus = new Bus();
-					$busList = $bus->getBusList();
-					foreach ($busList as $busitem) {
-						echo "<option value='{$busitem}'>{$busitem}</option>";
-					}
-				?>
-			</select>
-			<p><label>Chọn thời gian </label></p>
-			<input type="text" id="time-picker" />
-			<script type="text/javascript">
-				$("#time-picker").datetimepicker();
-			</script>
-			<input type="button" value="Chọn" onclick="javascript:busSelected()"/>	
+			<form method="post">
+				<select id="bus-number" name='bus-number'>
+					<?php
+						include_once dirname ( __FILE__ ) . '/config/include.inc.php';
+						/* Get list bus
+						*/
+						$bus = new Bus();
+						$busList = $bus->getBusList();
+						foreach ($busList as $busitem) {
+							if ($busitem == $_POST['bus-number'])
+								echo "<option selected='selected' value='{$busitem}'>{$busitem}</option>";
+							else
+								echo "<option value='{$busitem}'>{$busitem}</option>";
+						}
+					?>
+				</select>
+				<p><label>Chọn thời gian </label></p>
+				<input type="text" name="time-picker" id="time-picker" value="<?php if (isset($_POST['time-picker'])) echo $_POST['time-picker'];?>" />
+				<script type="text/javascript">
+					$("#time-picker").datetimepicker();
+				</script>
+				<input type="submit" value="Chọn" name='submit'/>
+			</form>	
 		</div>
 		
 		<div id="bus-info" class="side-bar-item">
@@ -81,5 +91,13 @@
 	<div id="map">
 	</div>
 	</div>
+	<?php 
+		if (isset($_POST['submit']))
+			echo "
+				<script>
+					busSelected();
+				</script>
+			";
+	?>
 </body>
 </html>
