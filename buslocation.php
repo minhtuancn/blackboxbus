@@ -14,6 +14,8 @@
 	}
 	
 	$busInfoAtTime = $bus->getBusInfoAtTime($time_picker);
+	if($busInfoAtTime == 0)
+		die("0|0|0");
 	$bus_location = explode(";", $busInfoAtTime['bus_location']);
 	$bus_speed = $busInfoAtTime['bus_speed'];
 	$info = "Biển số: {$busInfo['bus_number_plate']}";
