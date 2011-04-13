@@ -96,6 +96,10 @@
     		   if(text=="")$("#bus-location-picker").text(time+latlng);
     		   else $("#bus-location-picker").text(text+'|'+time+latlng);
     		   
+    		   lat = latlng.lat();
+    		   lng = latlng.lng();
+    		   
+    		   
     		  }
     		});
     
