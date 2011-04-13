@@ -18,6 +18,11 @@ select {
 	width: 90px;
 }
 
+textarea {
+	height: 210px;
+	width: 170px;
+}
+
 #map {
 	margin-left: 230px;
 	padding: 0;
