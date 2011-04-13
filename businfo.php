@@ -44,6 +44,7 @@
 //				</script>
 //			";
 			echo "<h4>Tốc độ: {$bus_speed} km/h</h4>";
+			//echo "<a>Toạ độ ($bus_location[0], $bus_location[1])</a>";
 	?>
 </body>
 </html>
