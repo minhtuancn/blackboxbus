@@ -74,7 +74,7 @@
      * Show Map with Click event to show array Points
      */
     function drawMapWithClick(){
-    	var arrPoint = new Array();
+    
     
     	 if (GBrowserIsCompatible()) {
              var map = new GMap2(document.getElementById("map"));
@@ -85,16 +85,20 @@
            }
     	 GEvent.addListener(map,"click", function(overlay, latlng) {     
     		  if (latlng) { 
+    				
     		    var myHtml = "The Point value is: " + latlng;
     		    map.openInfoWindow(latlng, myHtml);
-    		    arrPoint[i] = latlng;
+    		  
+    		    var time = getTime();
+    		   
     		    i++;
-    		    document.getElementById('bus-location-picker').innerHTML =  arrPoint;
+    		   var text = $("#bus-location-picker").text();
+    		   if(text=="")$("#bus-location-picker").text(time+latlng);
+    		   else $("#bus-location-picker").text(text+'|'+time+latlng);
+    		   
     		  }
     		});
-    	
-    	return arrPoint;
-    	
+    
     }
     /**
      * Draw Line of bus
@@ -112,6 +116,21 @@
     	
     	
     
+    }
+    /**
+     * Return current Time with Format ex:  2011-04-12 07:08:08
+     * @returns
+     */
+    function getTime(){
+    	var date = new Date();
+    	var year = date.getFullYear();
+    	var month = date.getMonth();
+    	var day = date.getDay();
+    	var hour = date.getHours();
+    	var min = date.getMinutes();
+    	var second = date.getSeconds();
+    	var time = year+"-"+month+"-"+day+" "+hour+":"+min+":"+second;
+    	return time;
     }
     
     
