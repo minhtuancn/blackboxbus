@@ -74,6 +74,7 @@
 				$date = explode("/", $arrTime[0]);
 				$start_minute = $date[2]."-".$date[0]."-".$date[1]." ".$arrTime[1].":00";
 				$end_minute = $date[2]."-".$date[0]."-".$date[1]." ".$arrTime[1].":59";
+				$time = $date[2]."-".$date[0]."-".$date[1]." ".$arrTime[1];
 				
 				$query = "
 					SELECT 
@@ -84,7 +85,7 @@
 						bus_data as bd on bi.bus_id = bd.bus_id
 					WHERE
 						bus_number_plate = '{$this->bus_number_plate}'
-						and ((bus_time_updated >= '$start_minute') and (bus_time_updated <= '$end_minute'))
+						and (bus_time_updated = '$time')
 					ORDER BY 
 						bus_time_updated desc
 					LIMIT 1
