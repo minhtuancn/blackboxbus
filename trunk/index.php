@@ -74,7 +74,8 @@
 				<p><label>Chọn thời gian </label></p>
 				<input type="text" name="time-picker" id="time-picker" value="<?php if (isset($_POST['time-picker'])) echo $_POST['time-picker'];?>" />
 				<script type="text/javascript">
-					$("#time-picker").datetimepicker();
+					$("#time-picker").datetimepicker({showSecond: true,
+						timeFormat: 'hh:mm:ss'});
 				</script>
 				<input type="submit" value="Chọn" name='submit'/>
 			</form>	
