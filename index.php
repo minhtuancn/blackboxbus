@@ -29,6 +29,7 @@
 		
 		//1.Display bus location
 		url = 'buslocation.php?bus_number_plate='+busNumber+'&time_picker='+timePicker;
+		
 		$.get(url, function (buslocation){
 			/*TODO HERE
 			*/
