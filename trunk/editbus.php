@@ -38,7 +38,7 @@
          var row = table.insertRow(rowCount);
 
          var cell1 = row.insertCell(0);
-         cell1.innerHTML = rowCount + 1;
+         cell1.innerHTML = rowCount ;
 
          var cell2 = row.insertCell(1);
          var element2 = document.createElement("input");
@@ -48,6 +48,7 @@
          var cell3 = row.insertCell(2);
          var element3 = document.createElement("input");
          element3.type = "text";
+         element3.id ="id3";
          cell3.appendChild(element3);
 
          var cell4 = row.insertCell(3);
@@ -70,8 +71,29 @@
          element7.type = "button";
          
          cell7.appendChild(element7);
+         
+      	
+      	 //Co the dung cell.setAttribute('','');
+      	 // Sau do su dung nhu 1 element bt.
+         
      }
-	
+	/*
+		Function to edit a car
+		row chinhs la rowIndex,thu tu cua row trong table
+		Kich vao la co the Edit
+	*/
+		function editCar(row){
+			var cells = document.getElementById('carTable').rows[row].cells;
+			for(i=0;i<6;i++)
+			{
+			$(cells[i]).each(function() {
+		         $(this).html('<input type="text" value="' + $(this).html() + '" />');
+		    });
+
+			}
+			//document.getElementById('carTable').rows[row].cells[0].setAttribute('type','text');
+					
+			}
 </script>
 </head>
 <body>
@@ -92,8 +114,8 @@
 	<!-- Code PHP to get data -->	
 				
 							<tr height="20">
-								<td style="border-right:1px solid #00CED1;">1</td>
-								<td style="border-right:1px solid #00CED1;border-left:1px solid #00CED1;">IDàdfdfd</td>
+								<td style="border-right:1px solid #00CED1;border-left:1px solid #00CED1;">1</td>
+								<td style="border-right:1px solid #00CED1;">IDàdfdfd</td>
 								<td style="border-right:1px solid #00CED1;">45464656</td>
 								<td style="border-right:1px solid #00CED1;">Trần Ngọc Cương</td>
 								<td style="border-right:1px solid #00CED1;">45454646456</td>
@@ -101,7 +123,7 @@
 								
 								<td style="border-right:1px solid #00CED1;">
 								
-								<input type="button" align="left" class="button-edit" onclick ="javascript:editCar()"/>
+								<input type="button" align="left" class="button-edit" onclick ="javascript:editCar(this.parentNode.parentNode.rowIndex)"/>
 								<input type="button" align="left" class="button-delete" onclick ="javascript:deleteCar(this.parentNode.parentNode.rowIndex)"/>
 										
 							</tr>
