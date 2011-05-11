@@ -46,3 +46,28 @@ textarea {
 label {
 	font-size:11px; font-weight:bold; color:#666;
 }
+#car {
+	margin-left: 230px;
+	padding :0;
+	
+}
+.button-edit{
+	background: url('../img/edit.png'); /* 16x16 px */
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 16px;
+    padding-left: 16px;
+	
+}
+.button-delete{
+	background: url('../img/icon_delete.gif'); /* 16x16 px */
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 16px;
+    padding-left: 16px;
+	
+}
