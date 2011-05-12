@@ -29,8 +29,9 @@
 	Function to add Value of New Bus To Database
 	*/
 	
-	function addBus(row){
-		
+	function addBus(){
+		//var row = .parentNode.parentNode.rowIndex ;
+		var row = 2;
 		var cells = document.getElementById('busTable').rows[row].cells;
 		//alert('ok'+cells[4]);
 		cells[1].innerHTML = 'FUCK';
@@ -54,7 +55,7 @@
 		
          var rowCount = table.rows.length;
          var row = table.insertRow(rowCount);
-
+			var row2=5;
          var cell1 = row.insertCell(0);
          cell1.innerHTML = rowCount ;
 
@@ -90,7 +91,7 @@
          element7.type = "button";
          element7.value = "Add";
          cell7.appendChild(element7);
-         cell7.setAttribute('onclick','addBus(row)');
+         cell7.setAttribute('onclick','addBus()');
          cell7.setAttribute('value','Add');
       	
       	 //Co the dung cell.setAttribute('','');
