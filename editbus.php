@@ -10,30 +10,48 @@
 <style type="text/css">@import "css/global.css";</style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src = "map/map.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"><!--<!--<!--
 /*
- * Function to delete a car in table at row i
+ * Function to delete a Bus in table at row i
  */
-	function deleteCar(i)
+	function deleteBus(i)
 	{
 		var ans = confirm("Bạn có muốn xóa thông tin chiếc xe này ?");
 // Delete
 	    if (ans == true) {
-		document.getElementById('carTable').deleteRow(i); 
-		//document.getElementById('carTable').rows.length--;
+		document.getElementById('busTable').deleteRow(i); 
+		//document.getElementById('busTable').rows.length--;
 // Code here
 		/*           Tu'          */
        	 }
 		}
-	/** 
-
-	* Function to add a Car 
+	/*
+	Function to add Value of New Bus To Database
 	*/
 	
-	function addCar() {
-		 
-         var table = document.getElementById('carTable');
+	function addBus(row){
+		
+		var cells = document.getElementById('busTable').rows[row].cells;
+		//alert('ok'+cells[4]);
+		cells[1].innerHTML = 'FUCK';
+		alert('Add to db');
+		}
+	
+	function editCar2(){
 
+			alert('edit Data');
+		}
+
+	
+	/** 
+
+	* Function to add a Row
+	*/
+	
+	function addRow() {
+		
+         var table = document.getElementById('busTable');
+		
          var rowCount = table.rows.length;
          var row = table.insertRow(rowCount);
 
@@ -48,12 +66,13 @@
          var cell3 = row.insertCell(2);
          var element3 = document.createElement("input");
          element3.type = "text";
-         element3.id ="id3";
+         element3.id = 3;
          cell3.appendChild(element3);
 
          var cell4 = row.insertCell(3);
          var element4 = document.createElement("input");
          element4.type = "text";
+         element4.id = 4;
          cell4.appendChild(element4);
 
          var cell5 = row.insertCell(4);
@@ -69,21 +88,22 @@
          var cell7 = row.insertCell(6);
          var element7 = document.createElement("input");
          element7.type = "button";
-         
+         element7.value = "Add";
          cell7.appendChild(element7);
-         
+         cell7.setAttribute('onclick','addBus(row)');
+         cell7.setAttribute('value','Add');
       	
       	 //Co the dung cell.setAttribute('','');
       	 // Sau do su dung nhu 1 element bt.
          
      }
-	/*
-		Function to edit a car
+	/**
+		Function to edit a Bus
 		row chinhs la rowIndex,thu tu cua row trong table
-		Kich vao la co the Edit
+		Kich vao la co the sua chua,modify
 	*/
-		function editCar(row){
-			var cells = document.getElementById('carTable').rows[row].cells;
+		function editBus(row){
+			var cells = document.getElementById('busTable').rows[row].cells;
 			for(i=0;i<6;i++)
 			{
 			$(cells[i]).each(function() {
@@ -91,15 +111,16 @@
 		    });
 
 			}
-			//document.getElementById('carTable').rows[row].cells[0].setAttribute('type','text');
-					
-			}
+			$(cells[i]).each(function() {
+		         $(this).html('<input type="button" value="Edit" onclick="editCar2()" />');
+		    });
+		}
 </script>
 </head>
 <body>
 
-	<div id="car" >
-	<table cellspacing="0px" cellpadding="0px"style="border-bottom:0px" width='80%' id="carTable">
+	<div id="bus-table" >
+	<table cellspacing="0px" cellpadding="0px"style="border-bottom:0px" width='80%' id="busTable">
 							<tr bgcolor="#8FBC8F">								
 								<td style="border-right:1px solid #00CED1;border-left:1px solid #00CED1;">STT</td>
 								<td style="border-right:1px solid #00CED1;">ID hộp đen</td>
@@ -123,8 +144,8 @@
 								
 								<td style="border-right:1px solid #00CED1;">
 								
-								<input type="button" align="left" class="button-edit" onclick ="javascript:editCar(this.parentNode.parentNode.rowIndex)"/>
-								<input type="button" align="left" class="button-delete" onclick ="javascript:deleteCar(this.parentNode.parentNode.rowIndex)"/>
+								<input type="button" align="left" class="button-edit" onclick ="javascript:editBus(this.parentNode.parentNode.rowIndex)"/>
+								<input type="button" align="left" class="button-delete" onclick ="javascript:deleteBus(this.parentNode.parentNode.rowIndex)"/>
 										
 							</tr>
 							
@@ -133,8 +154,8 @@
 	
 	</table>
 	
-	<tr><input type="button" onclick="javascript:addCar()" value="Add Car" style="margin-top:20px"/></tr>
-	<tr><input type="button" onclick="javascript:addCar()" value="Submit" style="margin-top:20px"/></tr>
+	<tr><input type="button" onclick="javascript:addRow()" value="Add Row" style="margin-top:20px"/></tr>
+	<tr><input type="button" onclick="javascript:addRow()" value="Submit" style="margin-top:20px"/></tr>
 	</div>
 </body>
 </html>
