@@ -139,6 +139,7 @@
 			$db = new DB();
 			$query = "INSERT INTO `blackboxbus`.`Bus` (`bus_id`, `bus_number_plate`, `black_box_id`, `bus_type`, `license_date`, `expiration_date`, `warranty_date`, `sum_of_km`, `sim_number`, `driver_code`, `bus_status`) VALUES 
 			                                          (null, '$bus_number_plate', '$black_box_id', '$bus_type', '$license_date', '$expiration_date', '$warranty_date', '$sum_of_km', '$sim_number', '$driver_code', '1')";
+
 			$result = $db->runQuery($query);
 			
 			//echo $query;
@@ -182,6 +183,32 @@
 			}
 			
 			return $arr;
+		}
+		
+		public static function delBus($bus_number_plate){
+			$db = new DB();
+			$query  = "DELETE FROM Bus where bus_number_plate ='{$bus_number_plate}'";
+			$result = $db->runQuery($query);
+			$db->close();
+			
+			echo $query;
+			
+			if (!$result)
+				return 0;
+			return 1;
+		}
+		
+		public static function updateBus($bus_number_plate, $black_box_id, $bus_type, $license_date, $expiration_date, $warranty_date,$sum_of_km,$sim_number,$driver_code){
+			$db = new DB();
+
+			$query = "UPDATE `Bus` SET `black_box_id` = '$black_box_id', `bus_type` = '$bus_type', `license_date` = '$license_date', `expiration_date` = '$expiration_date', `warranty_date` = '$warranty_date', `sum_of_km` = '$sum_of_km', `sim_number` = '$sim_number', `driver_code` = '$sim_number' WHERE `bus_number_plate` = '$bus_number_plate';";
+			
+			$result = $db->runQuery($query);
+			
+			//echo $query;
+			if (!$result)
+				return 0;
+			return 1;
 		}
 	}
 ?>
