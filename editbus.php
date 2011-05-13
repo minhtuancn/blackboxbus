@@ -224,20 +224,26 @@
 							</tr>	
 							
 	<!-- Code PHP to get data -->	
+	<?php
+	include_once dirname ( __FILE__ ) . '/config/include.inc.php';
+	
+	$arrayBus = BUS::getBusList();
+	$count = 1;
+	foreach ($arrayBus as $bus){?>
 				
 							<tr height="20">
-								<td style="border-right:1px solid #00CED1;border-left:1px solid #00CED1;">STT</td>
+								<td style="border-right:1px solid #00CED1;border-left:1px solid #00CED1;"><?php echo $count++;?></td>
 								
-								<td style="border-right:1px solid #00CED1;">Biển số </td>
-								<td style="border-right:1px solid #00CED1;">ID Hộp đen</td>
-								<td style="border-right:1px solid #00CED1;">Loại xe</td>
+								<td style="border-right:1px solid #00CED1;"><?php echo $bus["bus_number_plate"]?> </td>
+								<td style="border-right:1px solid #00CED1;"><?php echo $bus["black_box_id"]?></td>
+								<td style="border-right:1px solid #00CED1;"><?php echo $bus["bus_type"]?></td>
 								
-								<td style="border-right:1px solid #00CED1;">Ngày đăng ký</td>
-								<td style="border-right:1px solid #00CED1;">Hạn sử dụng</td>
-								<td style="border-right:1px solid #00CED1;">Hạn bảo hành</td>
-								<td style="border-right:1px solid #00CED1;">Tổng số Km</td>
-								<td style="border-right:1px solid #00CED1;">Mã SIM</td>
-								<td style="border-right:1px solid #00CED1;">Mã lái xe</td>
+								<td style="border-right:1px solid #00CED1;"><?php echo $bus["license_date"]?></td>
+								<td style="border-right:1px solid #00CED1;"><?php echo $bus["expiration_date"]?></td>
+								<td style="border-right:1px solid #00CED1;"><?php echo $bus["warranty_date"]?></td>
+								<td style="border-right:1px solid #00CED1;"><?php echo $bus["sum_of_km"]?></td>
+								<td style="border-right:1px solid #00CED1;"><?php echo $bus["sim_number"]?></td>
+								<td style="border-right:1px solid #00CED1;"><?php echo $bus["driver_code"]?></td>
 								
 							
 								
@@ -247,7 +253,9 @@
 								<input type="button" align="left" class="button-delete" onclick ="javascript:deleteBus(this.parentNode.parentNode.rowIndex)"/></td>
 										
 							</tr>
-							
+		<?php 
+			}
+		?>					
 							
 					
 	
