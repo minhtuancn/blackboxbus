@@ -156,7 +156,7 @@
 	</table>
 	
 	<tr><input type="button" onclick="javascript:addRow()" value="Add Row" style="margin-top:20px"/></tr>
-	<tr><input type="button" onclick="javascript:addRow()" value="Submit" style="margin-top:20px"/></tr>
+	<tr><input type="button" onclick="javascript:addRow()" value="Save" style="margin-top:20px"/></tr>
 	</div>
 </body>
 </html>
