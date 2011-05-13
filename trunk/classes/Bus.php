@@ -190,9 +190,6 @@
 			$query  = "DELETE FROM Bus where bus_number_plate ='{$bus_number_plate}'";
 			$result = $db->runQuery($query);
 			$db->close();
-			
-			echo $query;
-			
 			if (!$result)
 				return 0;
 			return 1;

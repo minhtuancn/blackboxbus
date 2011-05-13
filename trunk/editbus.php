@@ -10,19 +10,28 @@
 <style type="text/css">@import "css/global.css";</style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src = "map/map.js"></script>
-<script type="text/javascript"><!--<!--<!--
+<script type="text/javascript"><!--
 /*
  * Function to delete a Bus in table at row i
  */
-	function deleteBus(i)
+	function deleteBus(row)
 	{
 		var ans = confirm("Bạn có muốn xóa thông tin chiếc xe này ?");
 // Delete
 	    if (ans == true) {
-		document.getElementById('busTable').deleteRow(i); 
+	   	cells =  document.getElementById('busTable').rows[row].cells;
+	    bus_number_plate = cells[1].innerHTML;
+	   
+		document.getElementById('busTable').deleteRow(row); 
+		url = "delbus.php?bus_number_plate="+bus_number_plate;
+		$.get(url,function(result){
+				if(result==1)alert("Delete Success");
+				else alert("Delete Fail");
+			})
+			
 		//document.getElementById('busTable').rows.length--;
 // Code here
-		/*           Tu'          */
+		
        	 }
 		}
 	/*
@@ -46,7 +55,7 @@
 	
 //  Add to DB
 
-		url = "http://localhost/blackboxbus/addBus.php?bus_number_plate="+bus_number_plate+"&black_box_id="+black_box_id+"&bus_type="+bus_type+"&license_date="+license_date+"&expiration_date="+expiration_date+"&warranty_date="+warranty_date+"&sum_of_km="+sum_of_km+"&sim_number="+sim_number+"&driver_code="+driver_code;
+		url = "addBus.php?bus_number_plate="+bus_number_plate+"&black_box_id="+black_box_id+"&bus_type="+bus_type+"&license_date="+license_date+"&expiration_date="+expiration_date+"&warranty_date="+warranty_date+"&sum_of_km="+sum_of_km+"&sim_number="+sim_number+"&driver_code="+driver_code;
 
 		
 		$.get(url, function (result){
@@ -70,11 +79,6 @@
 	
 		}
 	
-	function editBus2(){
-
-		
-		}
-
 	
 	/** 
 
@@ -168,7 +172,6 @@
          element13.value = "Add";
          cell13.appendChild(element13);
          cell13.setAttribute('onclick','addBus('+rowCount+')');
-         //cell14.setAttribute('onclick','addBus1()');
          cell13.setAttribute('value','Add');
          //var i = rowCount+'-1';
         // alert('ok'+document.getElementById(i).type);
@@ -189,17 +192,94 @@
 			var cells = document.getElementById('busTable').rows[row].cells;
 			for(i=0;i<10;i++)
 			{
+				j=i+1;
 			$(cells[i]).each(function() {
-		         $(this).html('<input type="text" value="' + $(this).html() + '" />');
+		         $(this).html('<input type="text" value="' + $(this).html() + '" id = "'+row+'+'+j+'" />');
 		    });
 
 			}
-		
-			$(cells[i]).each(function() {
-		         $(this).html('<input type="button" value="OK" onclick="editBus2()" />');
-		    });
+			// Delete old buttons
+			document.getElementById('busTable').rows[row].deleteCell(10);
+			document.getElementById('busTable').rows[row].deleteCell(10);
+			// Add Another Edit button
+			 var cell11 = document.getElementById('busTable').rows[row].insertCell(10);
+			 var element11 = document.createElement("input");
+	         element11.type = "button";
+	         element11.value = "OK";
+	         cell11.appendChild(element11);
+	         cell11.setAttribute('onclick','editBus2('+row+')');
+		     // Add Another Delete button
+			var cell12 = document.getElementById('busTable').rows[row].insertCell(11);
+			cell12.setAttribute('type','button');
+	        cell12.setAttribute('class','button-delete');
+	        cell12.setAttribute('onclick','deleteBus('+row+')');	
+			//$(cells[i]).each(function() {
+		      //   $(this).html('<input type="button" value="OK" onclick="editBus2('+row+')" />');
+		    //});
 		}
-</script>
+		/*
+			Function to Update Db
+		*/
+		function editBus2(row){
+			
+		
+				//Get Value 
+				bus_stt = document.getElementById(row+'+'+1).value;
+				bus_number_plate = document.getElementById(row+'+'+2).value;
+				black_box_id = document.getElementById(row+'+'+3).value;
+				bus_type = document.getElementById(row+'+'+4).value;
+				license_date = document.getElementById(row+'+'+5).value;
+				expiration_date = document.getElementById(row+'+'+6).value;
+				warranty_date = document.getElementById(row+'+'+7).value;
+				sum_of_km = document.getElementById(row+'+'+8).value;
+				
+				sim_number = document.getElementById(row+'+'+9).value;
+				driver_code = document.getElementById(row+'+'+10).value;
+				//
+				{
+					var table = document.getElementById('busTable');
+					var cells = table.rows[row].cells;
+					cells[0].innerHTML = bus_stt;
+					cells[1].innerHTML = bus_number_plate;
+					cells[2].innerHTML = black_box_id;
+					cells[3].innerHTML = bus_type;
+					cells[4].innerHTML = license_date;
+					cells[5].innerHTML = expiration_date;
+					cells[6].innerHTML = warranty_date;
+					cells[7].innerHTML = sum_of_km;
+					cells[8].innerHTML = sim_number;
+					cells[9].innerHTML = driver_code;
+				
+					//Delte Edit and Delete Button
+					document.getElementById('busTable').rows[row].deleteCell(10); 
+					document.getElementById('busTable').rows[row].deleteCell(10);
+					// Add Another Edit button
+					var cell11 = table.rows[row].insertCell(10);
+					cell11.setAttribute('type','button');
+			        cell11.setAttribute('class','button-edit');
+			        cell11.setAttribute('onclick','editBus('+row+')');	
+				     // Add Another Delete button
+					var cell12 = table.rows[row].insertCell(11);
+					cell12.setAttribute('type','button');
+			        cell12.setAttribute('class','button-delete');
+			        cell12.setAttribute('onclick','deleteBus('+row+')');	
+					}
+				
+				// Add to Db
+				url = "updateBus.php?bus_number_plate="+bus_number_plate+"&black_box_id="+black_box_id+"&bus_type="+bus_type+"&license_date="+license_date+"&expiration_date="+expiration_date+"&warranty_date="+warranty_date+"&sum_of_km="+sum_of_km+"&sim_number="+sim_number+"&driver_code="+driver_code;
+				
+				$.get(url, function (result){
+					//alert(result);
+					if (result == 1){
+						alert("Update Success");} 
+					else
+						alert("Update Fail");
+				});
+				
+			}
+
+		
+--></script>
 </head>
 <body>
 
