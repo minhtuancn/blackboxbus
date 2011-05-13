@@ -54,18 +54,7 @@
 			return $row;
 		}
 		
-		public static function getBusList() {
-			$db = new DB();
-			$query  = "SELECT bus_number_plate from bus_info";
-			$result = $db->runQuery($query);
-			$db->close();
-			
-			while ( $row = mysql_fetch_assoc($result)){
-				$arr[] = $row['bus_number_plate'];
-			}
-			
-			return $arr;
-		}
+		
 		
 		public function getBusInfoAtTime($time) {
 			
@@ -154,6 +143,43 @@
 			if (!$result)
 				return 0;
 			return 1;
+		}
+		
+		public static function getBusNumberPlateList() {
+			$db = new DB();
+			$query  = "SELECT bus_number_plate from Bus";
+			$result = $db->runQuery($query);
+			$db->close();
+			
+			while ( $row = mysql_fetch_assoc($result)){
+				$arr[] = $row['bus_number_plate'];
+			}
+			
+			return $arr;
+		}
+		
+		public static function getBusList() {
+			$db = new DB();
+			$query  = "SELECT * from Bus";
+			$result = $db->runQuery($query);
+			$db->close();
+			
+			$count = 0;
+			while ( $row = mysql_fetch_assoc($result)){
+				$arr[$count]['bus_number_plate'] = $row['bus_number_plate'];
+				$arr[$count]['black_box_id'] = $row['black_box_id'];
+				$arr[$count]['bus_type'] = $row['bus_type'];
+				$arr[$count]['license_date'] = $row['license_date'];
+				$arr[$count]['expiration_date'] = $row['expiration_date'];
+				$arr[$count]['warranty_date'] = $row['warranty_date'];
+				$arr[$count]['sum_of_km'] = $row['sum_of_km'];
+				$arr[$count]['sim_number'] = $row['sim_number'];
+				$arr[$count]['driver_code'] = $row['driver_code'];
+				$arr[$count]['bus_status'] = $row['bus_status'];
+				$count++;  
+			}
+			
+			return $arr;
 		}
 	}
 ?>
