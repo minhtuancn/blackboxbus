@@ -138,8 +138,10 @@
 		public static function addBus($bus_number_plate, $black_box_id, $bus_type, $license_date, $expiration_date, $warranty_date,$sum_of_km,$sim_number,$driver_code){
 			$db = new DB();
 			$query = "INSERT INTO `blackboxbus`.`Bus` (`bus_id`, `bus_number_plate`, `black_box_id`, `bus_type`, `license_date`, `expiration_date`, `warranty_date`, `sum_of_km`, `sim_number`, `driver_code`, `bus_status`) VALUES 
-			                                          ('', '$bus_number_plate', '$black_box_id', '$bus_type', '$license_date', '$expiration_date', $warranty_date', '$sum_of_km', '$sim_number', '$driver_code', '1')";
+			                                          (null, '$bus_number_plate', '$black_box_id', '$bus_type', '$license_date', '$expiration_date', '$warranty_date', '$sum_of_km', '$sim_number', '$driver_code', '1')";
 			$result = $db->runQuery($query);
+			
+			//echo $query;
 			if (!$result)
 				return 0;
 			return 1;

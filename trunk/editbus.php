@@ -29,18 +29,50 @@
 	Function to add Value of New Bus To Database
 	*/
 	
-	function addBus(){
-		//var row = .parentNode.parentNode.rowIndex ;
-		var row = 2;
+	function addBus(row){
+		
 		var cells = document.getElementById('busTable').rows[row].cells;
-		//alert('ok'+cells[4]);
-		cells[1].innerHTML = 'FUCK';
-		alert('Add to db');
+		
+		//Get Value 
+		bus_number_plate = document.getElementById(row+'-'+2).value;
+		black_box_id = document.getElementById(row+'-'+3).value;
+		bus_type = document.getElementById(row+'-'+4).value;
+		license_date = document.getElementById(row+'-'+5).value;
+		expiration_date = document.getElementById(row+'-'+6).value;
+		warranty_date = document.getElementById(row+'-'+7).value;
+		sum_of_km = document.getElementById(row+'-'+8).value;
+		sim_number = document.getElementById(row+'-'+9).value;
+		driver_code = document.getElementById(row+'-'+10).value;
+	
+//  Add to DB
+
+		url = "http://localhost/blackboxbus/addBus.php?bus_number_plate="+bus_number_plate+"&black_box_id="+black_box_id+"&bus_type="+bus_type+"&license_date="+license_date+"&expiration_date="+expiration_date+"&warranty_date="+warranty_date+"&sum_of_km="+sum_of_km+"&sim_number="+sim_number+"&driver_code="+driver_code;
+
+		
+		$.get(url, function (result){
+			//alert(result);
+			if (result == 1){
+				alert("Success");} 
+			else
+				alert("Fail");
+		});
+		cells[1].innerHTML = bus_number_plate;
+		cells[2].innerHTML = black_box_id;
+		cells[3].innerHTML = bus_type;
+		cells[4].innerHTML = license_date;
+		cells[5].innerHTML = expiration_date;
+		cells[6].innerHTML = warranty_date;
+		cells[7].innerHTML = sum_of_km;
+		cells[8].innerHTML = sim_number;
+		cells[9].innerHTML = driver_code;
+		
+		document.getElementById('busTable').rows[row].deleteCell(12); 
+	
 		}
 	
-	function editCar2(){
+	function editBus2(){
 
-			alert('edit Data');
+		
 		}
 
 	
@@ -55,49 +87,99 @@
 		
          var rowCount = table.rows.length;
          var row = table.insertRow(rowCount);
-			var row2=5;
-         var cell1 = row.insertCell(0);
+		 var cell1 = row.insertCell(0);
          cell1.innerHTML = rowCount ;
 
          var cell2 = row.insertCell(1);
          var element2 = document.createElement("input");
          element2.type = "text";
+         element2.id = rowCount+'-2';
          cell2.appendChild(element2);
-
+			
          var cell3 = row.insertCell(2);
          var element3 = document.createElement("input");
          element3.type = "text";
-         element3.id = 3;
+         element3.id = rowCount+'-3';
          cell3.appendChild(element3);
 
          var cell4 = row.insertCell(3);
          var element4 = document.createElement("input");
          element4.type = "text";
-         element4.id = 4;
+         element4.id = rowCount+'-4';
          cell4.appendChild(element4);
 
          var cell5 = row.insertCell(4);
          var element5 = document.createElement("input");
+         element5.id = rowCount+'-5';
          element5.type = "text";
          cell5.appendChild(element5);
 
          var cell6 = row.insertCell(5);
          var element6 = document.createElement("input");
+         element6.id = rowCount+'-6';
          element6.type = "text";
          cell6.appendChild(element6);
-         
+
          var cell7 = row.insertCell(6);
          var element7 = document.createElement("input");
-         element7.type = "button";
-         element7.value = "Add";
+         element7.id = rowCount+'-7';
+         element7.type = "text";
          cell7.appendChild(element7);
-         cell7.setAttribute('onclick','addBus()');
-         cell7.setAttribute('value','Add');
+
+         var cell8 = row.insertCell(7);
+         var element8 = document.createElement("input");
+         element8.id = rowCount+'-8';
+         element8.type = "text";
+         cell8.appendChild(element8);
+
+         var cell9 = row.insertCell(8);
+         var element9 = document.createElement("input");
+         element9.id = rowCount+'-9';
+         element9.type = "text";
+         cell9.appendChild(element9);
+
+         var cell10 = row.insertCell(9);
+         var element10 = document.createElement("input");
+         element10.id = rowCount+'-10';
+         element10.type = "text";
+         cell10.appendChild(element10);
+
+        
+//
+         var cell11 = row.insertCell(10);
+        // var element12 = document.createElement("input");
+        // element12.type = "button";
+        // cell12.appendChild(element12);
+         cell11.setAttribute('type','button');
+       	 cell11.setAttribute('class','button-edit');
+       	 cell11.setAttribute('onclick','editBus('+rowCount+')');
+
+         var cell12 = row.insertCell(11);
+         //var element13 = document.createElement("input");
+        // element13.type = "button";
+        // cell13.appendChild(element13);
+         cell12.setAttribute('type','button');
+         cell12.setAttribute('class','button-delete');
+         cell12.setAttribute('onclick','deleteBus('+rowCount+')');
+         
+         var cell13 = row.insertCell(12);
+         var element13 = document.createElement("input");
+         element13.type = "button";
+         element13.value = "Add";
+         cell13.appendChild(element13);
+         cell13.setAttribute('onclick','addBus('+rowCount+')');
+         //cell14.setAttribute('onclick','addBus1()');
+         cell13.setAttribute('value','Add');
+         //var i = rowCount+'-1';
+        // alert('ok'+document.getElementById(i).type);
       	
       	 //Co the dung cell.setAttribute('','');
       	 // Sau do su dung nhu 1 element bt.
          
      }
+    function addBus1(){
+		alert('OK');
+        }
 	/**
 		Function to edit a Bus
 		row chinhs la rowIndex,thu tu cua row trong table
@@ -105,15 +187,16 @@
 	*/
 		function editBus(row){
 			var cells = document.getElementById('busTable').rows[row].cells;
-			for(i=0;i<6;i++)
+			for(i=0;i<10;i++)
 			{
 			$(cells[i]).each(function() {
 		         $(this).html('<input type="text" value="' + $(this).html() + '" />');
 		    });
 
 			}
+		
 			$(cells[i]).each(function() {
-		         $(this).html('<input type="button" value="Edit" onclick="editCar2()" />');
+		         $(this).html('<input type="button" value="OK" onclick="editBus2()" />');
 		    });
 		}
 </script>
@@ -123,30 +206,45 @@
 	<div id="bus-table" >
 	<table cellspacing="0px" cellpadding="0px"style="border-bottom:0px" width='80%' id="busTable">
 							<tr bgcolor="#8FBC8F">								
-								<td style="border-right:1px solid #00CED1;border-left:1px solid #00CED1;">STT</td>
-								<td style="border-right:1px solid #00CED1;">ID hộp đen</td>
-								<td style="border-right:1px solid #00CED1;">Sim điện thoại</td>
-								<td style="border-right:1px solid #00CED1;">Tên lái xe</td>
-								<td style="border-right:1px solid #00CED1;">Ngày xe đăng ký</td>
+								<td width="10px"style="border-right:1px solid #00CED1;border-left:1px solid #00CED1; weight:10px" >STT</td>
+								
+								<td style="border-right:1px solid #00CED1;">Biển số </td>
+								<td style="border-right:1px solid #00CED1;">ID Hộp đen</td>
 								<td style="border-right:1px solid #00CED1;">Loại xe</td>
-					
-								<td style="border-right:1px solid #00CED1;">Tùy chọn</td>
+								
+								<td style="border-right:1px solid #00CED1;">Ngày đăng ký</td>
+								<td style="border-right:1px solid #00CED1;">Hạn sử dụng</td>
+								<td style="border-right:1px solid #00CED1;">Hạn bảo hành</td>
+								<td style="border-right:1px solid #00CED1;">Tổng số Km</td>
+								<td style="border-right:1px solid #00CED1;">Mã SIM</td>
+								<td style="border-right:1px solid #00CED1;">Mã lái xe</td>
+								
+								<td style="border-right:1px solid #00CED1;">Sửa</td>
+								<td style="border-right:1px solid #00CED1;">Xóa</td>
 							</tr>	
 							
 	<!-- Code PHP to get data -->	
 				
 							<tr height="20">
-								<td style="border-right:1px solid #00CED1;border-left:1px solid #00CED1;">1</td>
-								<td style="border-right:1px solid #00CED1;">IDàdfdfd</td>
-								<td style="border-right:1px solid #00CED1;">45464656</td>
-								<td style="border-right:1px solid #00CED1;">Trần Ngọc Cương</td>
-								<td style="border-right:1px solid #00CED1;">45454646456</td>
+								<td style="border-right:1px solid #00CED1;border-left:1px solid #00CED1;">STT</td>
+								
+								<td style="border-right:1px solid #00CED1;">Biển số </td>
+								<td style="border-right:1px solid #00CED1;">ID Hộp đen</td>
 								<td style="border-right:1px solid #00CED1;">Loại xe</td>
 								
-								<td style="border-right:1px solid #00CED1;">
+								<td style="border-right:1px solid #00CED1;">Ngày đăng ký</td>
+								<td style="border-right:1px solid #00CED1;">Hạn sử dụng</td>
+								<td style="border-right:1px solid #00CED1;">Hạn bảo hành</td>
+								<td style="border-right:1px solid #00CED1;">Tổng số Km</td>
+								<td style="border-right:1px solid #00CED1;">Mã SIM</td>
+								<td style="border-right:1px solid #00CED1;">Mã lái xe</td>
 								
-								<input type="button" align="left" class="button-edit" onclick ="javascript:editBus(this.parentNode.parentNode.rowIndex)"/>
-								<input type="button" align="left" class="button-delete" onclick ="javascript:deleteBus(this.parentNode.parentNode.rowIndex)"/>
+							
+								
+								<td>
+								<input type="button" align="left" class="button-edit" onclick ="javascript:editBus(this.parentNode.parentNode.rowIndex)"/></td>
+								<td style="border-right:1px solid #00CED1;">
+								<input type="button" align="left" class="button-delete" onclick ="javascript:deleteBus(this.parentNode.parentNode.rowIndex)"/></td>
 										
 							</tr>
 							
