@@ -37,10 +37,12 @@ class DB {
 	public function runQuery($query){
 		mysql_query("SET NAMES 'utf8'");
 		$result = mysql_query($query);
+		/*
+		DEBUG
 		if (!$result){
-			echo "Could not successfully run query ($sql) from DB: " . mysql_error();
+			echo "Could not successfully run query ($query) from DB: " . mysql_error();
     		exit;
-		}
+		}*/
 		return $result;
 	}
 }
