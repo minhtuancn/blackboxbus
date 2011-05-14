@@ -10,12 +10,12 @@
 	float:left;
 }
 
-#bus-info{
-	height: 300px;
+#bus-picker{
+	height: 550px;
 }
 
-select {
-	width: 90px;
+#bus-info{
+	height: 300px;
 }
 
 textarea {
@@ -75,4 +75,12 @@ label {
 .editbus{
 	width: 90px;
 }
+
+.time-picker {
+	width: 137px;
+}
+
+#bus-number{
+	width  : 165px;
+	height : 320px;
 }
