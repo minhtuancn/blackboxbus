@@ -98,23 +98,27 @@
          var element2 = document.createElement("input");
          element2.type = "text";
          element2.id = rowCount+'-2';
+         element2.className = "editbus" ;
          cell2.appendChild(element2);
 			
          var cell3 = row.insertCell(2);
          var element3 = document.createElement("input");
          element3.type = "text";
          element3.id = rowCount+'-3';
+         element3.className = "editbus";
          cell3.appendChild(element3);
 
          var cell4 = row.insertCell(3);
          var element4 = document.createElement("input");
          element4.type = "text";
          element4.id = rowCount+'-4';
+         element4.className = "editbus";
          cell4.appendChild(element4);
 
          var cell5 = row.insertCell(4);
          var element5 = document.createElement("input");
          element5.id = rowCount+'-5';
+         element5.className = "editbus";
          element5.type = "text";
          cell5.appendChild(element5);
 
@@ -122,30 +126,35 @@
          var element6 = document.createElement("input");
          element6.id = rowCount+'-6';
          element6.type = "text";
+         element6.className = "editbus";
          cell6.appendChild(element6);
 
          var cell7 = row.insertCell(6);
          var element7 = document.createElement("input");
          element7.id = rowCount+'-7';
          element7.type = "text";
+         element7.className = "editbus";
          cell7.appendChild(element7);
 
          var cell8 = row.insertCell(7);
          var element8 = document.createElement("input");
          element8.id = rowCount+'-8';
          element8.type = "text";
+         element8.className = "editbus";
          cell8.appendChild(element8);
 
          var cell9 = row.insertCell(8);
          var element9 = document.createElement("input");
          element9.id = rowCount+'-9';
          element9.type = "text";
+         element9.className = "editbus";
          cell9.appendChild(element9);
 
          var cell10 = row.insertCell(9);
          var element10 = document.createElement("input");
          element10.id = rowCount+'-10';
          element10.type = "text";
+         element10.className = "editbus";
          cell10.appendChild(element10);
 
         
@@ -194,7 +203,7 @@
 			{
 				j=i+1;
 			$(cells[i]).each(function() {
-		         $(this).html('<input type="text" value="' + $(this).html() + '" id = "'+row+'+'+j+'" />');
+		         $(this).html('<input type="text" class="editbus" value="' + $(this).html() + '" id = "'+row+'+'+j+'" />');
 		    });
 
 			}
@@ -279,7 +288,7 @@
 			}
 
 		
---></script>
+</script>
 </head>
 <body>
 
@@ -342,7 +351,6 @@
 	</table>
 	
 	<tr><input type="button" onclick="javascript:addRow()" value="Add Row" style="margin-top:20px"/></tr>
-	<tr><input type="button" onclick="javascript:addRow()" value="Save" style="margin-top:20px"/></tr>
 	</div>
 </body>
 </html>
