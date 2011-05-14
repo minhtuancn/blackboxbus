@@ -1,12 +1,9 @@
 <html>
 <head>
-<title>Black Box Bus - Demo Version</title>
+<title>Black Box Bus - Version 1.0</title>
 
 <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
 <script src="js/js.js"></script>
-<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
 
 <script src="js/JSCal/src/js/jscal2.js"></script>
 <script src="js/JSCal/src/js/lang/en.js"></script>
@@ -20,12 +17,19 @@
 <style type="text/css">@import "css/global.css";</style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src = "map/map.js"></script>
+
 <script>
+
+	var map = 2 ;
+
+	function createMap(){
+		map = drawSimpleMap();
+	}
 
 	$(document).ready(function () {
 		RANGE_CAL_1 = new Calendar({
 		    inputField: "time-picker-start",
-		    dateFormat: "%d/%m/%Y %H:%M:%S",
+		    dateFormat: "%Y-%m-%d %H:%M:%S",
 		    trigger: "f_rangeStart_trigger",
 		    bottomBar: false,
 		    showTime   : 24,
@@ -37,7 +41,7 @@
 
 		RANGE_CAL_2 = new Calendar({
 		    inputField: "time-picker-end",
-		    dateFormat: "%d/%m/%Y %H:%M:%S",
+		    dateFormat: "%Y-%m-%d %H:%M:%S",
 		    trigger: "f_rangeEnd_trigger",
 		    bottomBar: false,
 		    showTime   : 24,
@@ -48,15 +52,13 @@
 		});
 
 		
-	
-	});
-
-	$(function (){		
-		var map = drawSimpleMap();
+		createMap();
+		
 		$('#bus-number').toChecklist({
 			addSearchBox            : true,
 			required                : true
 		});
+	
 	});
 
 	count = 0;
@@ -67,32 +69,34 @@
 			2. Display bus number info
 		*/
 
-
-		
 		//Get input
+		map.clearOverlays();
 		busNumber  = $("#bus-number").checklistValue();
 		timePickerStart = $("#time-picker-start").val();
 		timePickerEnd   = $("#time-picker-end").val();
-		for (i=0; i<busNumber.length; i++){
-			alert(busNumber[i]);
+		busCount = 0;
+		for (iBus=0; iBus<busNumber.length; iBus++){
+			//1.Display bus location
+			url = 'buslocation.php?bus_number_plate='+busNumber[iBus]+'&time_picker_start='+timePickerStart+'&time_picker_end='+timePickerEnd;
+			
+			$.get(url, function (buslocation){
+				buslocation = buslocation.split("<br>") ;
+				numOfPoint = buslocation.length - 1;
+				listPoint = new Array();
+				for (i=0; i<numOfPoint; i++){
+					temp = buslocation[i].split(";");
+					listPoint[i] = new GLatLng(temp[0],temp[1]);
+				}
+				drawLineWithMarker(map, listPoint, iBus);
+			});
 		}
 		
-		//1.Display bus location
-		url = 'buslocation.php?bus_number_plate='+busNumber+'&time_picker='+timePicker;
 		
-		$.get(url, function (buslocation){
-			/*TODO HERE
-			*/
-			$("#map").html("");
-			var map = drawSimpleMap();
-			buslocation = buslocation.split("|");
-			drawMap(map,buslocation[0],buslocation[1],buslocation[2]);
-		});
 		
-		url = 'businfo.php?bus_number_plate='+busNumber+'&time_picker='+timePicker;
-		$.get(url, function (businfo){
-			$("#bus-info").html(businfo);
-		});
+//		url = 'businfo.php?bus_number_plate='+busNumber+'&time_picker='+timePickerStart;
+//		$.get(url, function (businfo){
+//			$("#bus-info").html(businfo);
+//		});
 		
 	}
 </script>
@@ -129,20 +133,22 @@
 						}
 					?>
 				</select>
-				<br><br>
-				<input type="button" value="Chọn" name='submit' onclick="javascript:busSelected()"/>
+				<br>
+				<input type="button" value="Chọn" name='submit' id='submit' onclick="javascript:busSelected()"/>
 			</form>	
 		</div>
 		
+		
+	
 		<div id="bus-info" class="side-bar-item">
-			<div class="side-bar-item-header">
-				THÔNG TIN XE
-			</div>
+				<div class="side-bar-item-header">
+					THÔNG TIN XE
+				</div>
 		</div>
 	</div> <!-- End side-bar -->
 	
 	<div id="map">
 	</div>
-	</div>
+	</div> <!-- End content -->
 </body>
 </html>

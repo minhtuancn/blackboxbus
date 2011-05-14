@@ -293,23 +293,23 @@
 <body>
 
 	<div id="bus-table" >
-	<table cellspacing="0px" cellpadding="0px"style="border-bottom:0px" width='80%' id="busTable">
+	<table cellspacing="0px" cellpadding="0px"style="border-bottom:0px;border-spacing: 5px; padding:5px" width='80%' id="busTable">
 							<tr bgcolor="#8FBC8F">								
-								<td width="10px"style="border-right:1px solid #00CED1;border-left:1px solid #00CED1; weight:10px" >STT</td>
+								<td class="table-header" width="10px"style="border-right:1px solid #00CED1;border-left:1px solid #00CED1; weight:10px" >STT</td>
 								
-								<td style="border-right:1px solid #00CED1;">Biển số </td>
-								<td style="border-right:1px solid #00CED1;">ID Hộp đen</td>
-								<td style="border-right:1px solid #00CED1;">Loại xe</td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">Biển số </td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">ID Hộp đen</td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">Loại xe</td>
 								
-								<td style="border-right:1px solid #00CED1;">Ngày đăng ký</td>
-								<td style="border-right:1px solid #00CED1;">Hạn sử dụng</td>
-								<td style="border-right:1px solid #00CED1;">Hạn bảo hành</td>
-								<td style="border-right:1px solid #00CED1;">Tổng số Km</td>
-								<td style="border-right:1px solid #00CED1;">Mã SIM</td>
-								<td style="border-right:1px solid #00CED1;">Mã lái xe</td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">Ngày đăng ký</td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">Hạn sử dụng</td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">Hạn bảo hành</td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">Tổng số Km</td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">Mã SIM</td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">Mã lái xe</td>
 								
-								<td style="border-right:1px solid #00CED1;">Sửa</td>
-								<td style="border-right:1px solid #00CED1;">Xóa</td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">Sửa</td>
+								<td class="table-header" style="border-right:1px solid #00CED1;">Xóa</td>
 							</tr>	
 							
 	<!-- Code PHP to get data -->	
@@ -350,7 +350,7 @@
 	
 	</table>
 	
-	<tr><input type="button" onclick="javascript:addRow()" value="Add Row" style="margin-top:20px"/></tr>
+	<tr><input type="button" onclick="javascript:addRow()" value="Thêm Xe" style="margin-top:20px"/></tr>
 	</div>
 </body>
 </html>

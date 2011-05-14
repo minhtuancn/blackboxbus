@@ -29,7 +29,7 @@
     function getLine(a,b){
     	var aline = new GPolyline([
     	a,b
-    ], "#FF0000", 3);
+    ], "#FF0000", 2);
    	return aline;
     }
     /**
@@ -119,17 +119,43 @@
      * arrPoint : array of points
     
      */
-    function drawLine(map,arrPoint) {
+    function drawLine(map, arrayPoint) {
     	var i = 0;
-    	while(i<arrayPoint.length-1){
+    	while(i<arrayPoint.length - 1){
     		
 			aline = getLine(arrayPoint[i],arrayPoint[i+1]);
 			i=i+1;
 			map.addOverlay(aline);
-           }
-    	
-    	
+           }    
+    }
     
+    function createClickableMarker(point, No){
+    	// create Icon
+    	var customIcon = new GIcon(G_DEFAULT_ICON);
+    	customIcon.image = "img/GMapIcon/icon"+No+".png";
+    	markerOptions = { icon:customIcon };
+    	marker = new GMarker(point, markerOptions);
+    	
+    	GEvent.addListener(marker,"click",function(){
+    		
+    		alert(busNumber[No-1]);
+    	});
+    	return marker;
+    }
+    
+    function drawLineWithMarker(map, arrayPoint, iBus) {
+    	var i = 0;
+    	busCount = busCount%26 + 1;
+    	
+    	while(i<arrayPoint.length - 1){
+			aline = getLine(arrayPoint[i],arrayPoint[i+1]);
+			map.addOverlay(aline);
+			marker = createClickableMarker(arrayPoint[i], busCount);
+			map.addOverlay(marker);
+			i=i+1;
+           }  
+    	marker = createClickableMarker(arrayPoint[i], busCount);
+    	map.addOverlay(marker);
     }
     /**
      * Return current Time with Format ex:  2011-04-12 07:08:08
