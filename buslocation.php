@@ -1,26 +1,14 @@
 <?php
 	include_once dirname ( __FILE__ ) . '/config/include.inc.php';
 	
-	if (!isset($_GET['bus_number_plate']))
-		return;
 	$bus_number_plate = $_GET['bus_number_plate'];
-	$bus = new Bus($bus_number_plate);
-	$busInfo = $bus->getBusInfo();
-
-	if (!isset($_GET['time_picker'])) 
-		$time_picker = 0;
-	else {
-		$time_picker = $_GET['time_picker'];
+	$time_picker_start = $_GET['time_picker_start'];
+	$time_picker_end = $_GET['time_picker_end'];
+	
+	$blackbox = new BlackBox($bus_number_plate);
+	$arrayPoints = $blackbox->getLocation($time_picker_start, $time_picker_end);
+	foreach ($arrayPoints as $arrayPoint){
+		echo $arrayPoint;
+		echo "<br>";
 	}
-	
-	$busInfoAtTime = $bus->getBusInfoAtTime($time_picker);
-	if($busInfoAtTime == 0)
-		die("0|0|0");
-	$bus_location = explode(";", $busInfoAtTime['bus_location']);
-	$bus_speed = $busInfoAtTime['bus_speed'];
-	$info = "Biển số: {$busInfo['bus_number_plate']}";
-	$info .= "<br>";
-	$info .= "Tốc độ: $bus_speed km/h";
-	
-	echo "$bus_location[0]|$bus_location[1]|$info";
 ?>

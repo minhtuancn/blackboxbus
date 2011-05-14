@@ -3,6 +3,7 @@
 #content {
 	padding-top: 25px;
 	padding-left:2px;
+	display: block;
 }
 
 #side-bar{
@@ -11,11 +12,13 @@
 }
 
 #bus-picker{
-	height: 550px;
+	height: 510px;
 }
 
 #bus-info{
-	height: 300px;
+	float: left;
+	height: 175px;
+	width: 1370px;
 }
 
 textarea {
@@ -29,6 +32,11 @@ textarea {
 	height: 535px;
 }
 
+#report {
+	margin-left: 230px;
+	padding: 0;
+}
+
 .side-bar-item {
   background:#f2f2e6; padding:10px; border:1px solid #fff; border-color:#fff #666661 #666661 #fff; margin-bottom:36px;
 }
@@ -36,6 +44,14 @@ textarea {
 .side-bar-item-header {
 	background:#bfbf30; 
 	color:#fff; 
+	font:17px/21px Calibri, Arial, Helvetica, sans-serif; 
+	padding:0 10px; 
+	margin:-26px 0 0 -11px; 
+	font-weight:bold; border:1px solid #fff; 
+	border-color:#e5e5c3 #505014 #505014 #e5e5c3;
+}
+
+.side-bar-item-header-2 { 
 	font:17px/21px Calibri, Arial, Helvetica, sans-serif; 
 	padding:0 10px; 
 	margin:-26px 0 0 -11px; 
@@ -83,4 +99,12 @@ label {
 #bus-number{
 	width  : 165px;
 	height : 320px;
+}
+
+.table-header {
+	font-size: 14px;
+	font-weight: normal;
+	color: #039;
+	border-bottom: 2px solid #6678B1;
+	padding: 10px 8px;
 }
